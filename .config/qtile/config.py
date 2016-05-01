@@ -100,6 +100,8 @@ screens = [
                 widget.GroupBox(highlight_method='block', padding=0, padding_x=8, margin=0,borderwidth=0),
                 widget.Prompt(),
                 widget.WindowName(),
+                widget.ThermalSensor(tag_sensor='Core 0', threshold=86),
+                widget.ThermalSensor(tag_sensor='Core 1', threshold=86),
                 widget.Systray(),
                 widget.Volume(),
                 widget.Battery(format='({percent:2.0%} - {hour:d}:{min:02d})'),
