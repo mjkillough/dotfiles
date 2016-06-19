@@ -6,7 +6,7 @@ feh --bg-fill ~/Photos/wallpaper &
 /usr/lib/gnome-settings-daemon/gnome-settings-daemon-localeexec &
 gsettings set org.gnome.desktop.interface scaling-factor 2
 
-compton &
+compton --vsync drm &
 
 source ~/.profile
 

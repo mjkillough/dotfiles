@@ -6,7 +6,7 @@ Xft.dpi:	227
 Xft.autohint:	0
 Xft.lcdfilter:	lcddefault
 
-urxvt.font:	xft:SourceCodePro:size=10.5
+urxvt.font:	xft:EnvyCodeR:size=10.5
 
 urxvt.scrollBar: false
 
@@ -15,6 +15,11 @@ urxvt.iso14755: false
 urxvt.iso14755_52: false
 urxvt.resize-font.smaller: C-Down
 urxvt.resize-font.bigger: C-Up
+
+! Clickable links.
+urxvt*perl-ext: default,matcher
+urxvt*urlLauncher: /usr/bin/chrome
+urxvt*matcher.Button: 1
 
 
 ! colours
