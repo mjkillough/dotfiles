@@ -1,0 +1,12 @@
+#!/bin/sh
+
+
+# Specifying --bg-fill twice puts the same background on both monitors (if
+# there are two monitors).
+feh --bg-fill ~/Photos/wallpaper --bg-fill ~/Photos/wallpaper
+
+# We download the new wallpaper for the next time it needs to be set. We don't
+# attempt to download-and-then-set, as the download can take a while or not be
+# possible.
+# (This is intentionally simple. Half-complete downloads could screw with us, etc.)
+wget https://source.unsplash.com/random/2560x1600 -O ~/Photos/random-wallpaper.jpg -b

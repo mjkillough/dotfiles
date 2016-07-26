@@ -48,6 +48,7 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawn("lighthouse-launcher")),
     Key([mod], "e", lazy.spawncmd()),
+    Key([mod], "q", lazy.spawn("random-wallpaper")),
     Key([mod], "Return", lazy.spawn("urxvt")),
 ]
 
