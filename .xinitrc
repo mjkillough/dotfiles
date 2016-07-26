@@ -1,4 +1,4 @@
-xrdb -merge ~/.Xresources
+#!/bin/sh
 
 # Need to start daemon for Sublime Text 3 to pickup settings.
 /usr/lib/gnome-settings-daemon/gnome-settings-daemon-localeexec &
@@ -10,5 +10,8 @@ source ~/.profile
 
 random-wallpaper
 
+xrdb -merge ~/.Xresources
+
 exec qtile
+
 
