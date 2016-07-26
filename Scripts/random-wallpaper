@@ -9,4 +9,4 @@ feh --bg-fill ~/Photos/wallpaper --bg-fill ~/Photos/wallpaper
 # attempt to download-and-then-set, as the download can take a while or not be
 # possible.
 # (This is intentionally simple. Half-complete downloads could screw with us, etc.)
-wget https://source.unsplash.com/random/2560x1600 -O ~/Photos/random-wallpaper.jpg -b
+wget https://source.unsplash.com/random/2560x1600 -O ~/Photos/random-wallpaper.jpg -b -q -o /dev/null
