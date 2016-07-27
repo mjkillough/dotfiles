@@ -6,7 +6,7 @@ Xft.dpi:	227
 Xft.autohint:	0
 Xft.lcdfilter:	lcddefault
 
-urxvt.font:	xft:EnvyCodeR:size=10.5
+urxvt.font:	xft:EnvyCodeR:size=11.5
 
 urxvt.scrollBar: false
 
