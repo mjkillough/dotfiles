@@ -61,8 +61,9 @@ for i in groups:
     keys.append(Key([mod, "shift"], i.name, lazy.window.togroup(i.name)))
 
 layouts = [
-    layout.Max(),
-    layout.xmonad.MonadTall(border_width=1, border_focus='#efefef'),
+    layout.xmonad.MonadTall(margin=30, border_width=1, border_focus='#eeeeee'),
+    layout.xmonad.MonadTall(border_width=1, border_focus='#eeeeee'),
+    layout.max.Max(),
 ]
 
 widget_defaults = dict(
