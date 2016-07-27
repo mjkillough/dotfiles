@@ -74,7 +74,7 @@ widget_defaults = dict(
 screens = [
     Screen(bottom=bar.Bar(
         [
-            widget.GroupBox(highlight_method='block', padding=0, padding_x=8, margin=0,borderwidth=0),
+            widget.GroupBox(highlight_method='block', padding=0, padding_x=8, margin=0, borderwidth=0),
             widget.Prompt(),
             widget.WindowName(),
             widget.ThermalSensor(tag_sensor='Core 0', threshold=86),
