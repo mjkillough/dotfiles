@@ -52,19 +52,30 @@ keys = [
     Key([mod], "Return", lazy.spawn("urxvt")),
 ]
 
-groups = [Group(i) for i in "asdf"]
 
-for i in groups:
-    # mod1 + letter of group = switch to group
-    keys.append(Key([mod], i.name, lazy.group[i.name].toscreen()))
-    # mod1 + shift + letter of group = switch to & move focused window to group
-    keys.append(Key([mod, "shift"], i.name, lazy.window.togroup(i.name)))
 
 layouts = [
-    layout.xmonad.MonadTall(margin=30, border_width=1, border_focus='#eeeeee'),
-    layout.xmonad.MonadTall(border_width=1, border_focus='#eeeeee'),
-    layout.max.Max(),
+    layout.xmonad.MonadTall(name='monad-padded', margin=30, border_width=1, border_focus='#eeeeee'),
+    layout.xmonad.MonadTall(name='monad', border_width=1, border_focus='#eeeeee'),
+    layout.max.Max(name='max'),
 ]
+
+
+_groups = [
+    ('a', 'chrome', 'max'),
+    ('s', 'code', 'max'),
+    ('d', 'term', None),
+    ('f', 'misc', None),
+]
+groups = []
+for key, name, default_layout in _groups:
+    groups.append(Group(name, layout=default_layout))
+
+    # mod1 + letter of group = switch to group
+    keys.append(Key([mod], key, lazy.group[name].toscreen()))
+    # mod1 + shift + letter of group = switch to & move focused window to group
+    keys.append(Key([mod, "shift"], key, lazy.window.togroup(name)))
+
 
 widget_defaults = dict(
     font='SourceCodePro',
