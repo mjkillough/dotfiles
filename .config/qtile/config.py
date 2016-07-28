@@ -50,6 +50,8 @@ keys = [
     Key([mod], "e", lazy.spawncmd()),
     Key([mod], "q", lazy.spawn("random-wallpaper")),
     Key([mod], "Return", lazy.spawn("urxvt")),
+    Key([mod], "c", lazy.spawn("chrome")),
+    Key([mod], "v", lazy.spawn("visual-studio-code")),
 ]
 
 
