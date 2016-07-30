@@ -10,8 +10,7 @@ source ~/.profile
 
 random-wallpaper
 
-xrdb -merge ~/.Xresources
-
-exec qtile
-
+# Might need to do this again after changing DPI, even though lightdm
+# does it.
+# xrdb -merge ~/.Xresources
 
