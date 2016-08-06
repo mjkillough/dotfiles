@@ -2,5 +2,6 @@
 {
     "editor.renderWhitespace": true,
     "files.trimTrailingWhitespace": true,
-    "editor.fontSize": 16
+    "editor.fontSize": 16,
+    "editor.fontFamily": "'Envy Code R'"
 }
