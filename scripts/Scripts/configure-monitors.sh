@@ -1,0 +1,105 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+import re
+import subprocess
+
+
+# Order is important - displays are shown left-to-right.
+# This script does not support arranging displays vertically, but it would be
+# simple to add if needed.
+DISPLAYS = [
+    # Mini-display port on LHS of MBP.
+    dict(
+        port='HDMI2',
+        mode=(1920, 1080),
+        scale=(2, 2),
+    ),
+
+    # MBP retina screen
+    dict(
+        port='eDP1',
+        mode=(2560, 1600),
+        scale=(1, 1),
+    ),
+]
+
+
+def build_xrandr_cmd_line(definitions, connected_outputs):
+    """Builds an xrandr command line, given the monitor `definitions` and 
+    a list of connected monitors. The order of definitions is important - the
+    screens are arranged left-to-right.
+
+    Useful docs: http://askubuntu.com/questions/393400/
+    """
+    x = 0
+    fb_width = 0
+    fb_height = 0
+    command_line = []
+
+    connected = [
+        display
+        for display in definitions
+        if display['port'] in connected_outputs
+    ]
+    disconnected = [
+        display
+        for display in definitions
+        if display['port'] not in connected_outputs
+    ]
+
+    for display in connected:
+        width, height = display['mode']
+        scale_x, scale_y = display['scale']
+
+        command_line += [
+            '--output', display['port'],
+            '--mode', '%ix%i' % (width, height),
+            '--scale', '%ix%i' % (scale_x, scale_y),
+            '--pos', '%ix0' % (x,), # right-of previous monitors
+        ]
+
+        fb_width += scale_x * width
+        fb_height = max(fb_height, scale_y * height)
+        x += scale_x * width
+
+    for display in disconnected:
+        command_line += [
+            '--output', display['port'],
+            '--off',
+        ]
+
+    if len(connected) > 1:
+        command_line += [
+            '--fb', '%ix%i' % (fb_width, fb_height)
+        ]
+
+    return command_line
+
+
+def query_connected_outputs():
+    """Returns a list of connected outputs, found by sniffing `xrandr -q`."""
+    connected_re = re.compile(r'^(?P<output>[^ ]+) connected')
+    xrandr_lines = (
+        subprocess.check_output(['xrandr', '-q'])
+            .decode('utf-8')
+            .split('\n')
+    )
+    matches = map(connected_re.search, xrandr_lines)
+    return [
+        match.group('output')
+        for match in matches
+        if match is not None
+    ]
+
+
+def set_xrandr_config(definitions):
+    """Determines connected outputs and sets appropriate xrandr config."""
+    connected_outputs = query_connected_outputs()
+    cmd = build_xrandr_cmd_line(definitions, connected_outputs)
+    print(cmd)
+    subprocess.check_call(['xrandr'] + cmd)
+
+
+if __name__ == '__main__':
+    set_xrandr_config(DISPLAYS)
