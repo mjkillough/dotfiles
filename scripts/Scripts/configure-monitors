@@ -9,7 +9,12 @@ import subprocess
 # This script does not support arranging displays vertically, but it would be
 # simple to add if needed.
 DISPLAYS = [
-    # Mini-display port on LHS of MBP.
+    # Mini-display ports on LHS of MBP.
+    dict(
+        port='HDMI1',
+        mode=(1920, 1080),
+        scale=(2, 2),
+    ),
     dict(
         port='HDMI2',
         mode=(1920, 1080),
@@ -97,7 +102,6 @@ def set_xrandr_config(definitions):
     """Determines connected outputs and sets appropriate xrandr config."""
     connected_outputs = query_connected_outputs()
     cmd = build_xrandr_cmd_line(definitions, connected_outputs)
-    print(cmd)
     subprocess.check_call(['xrandr'] + cmd)
 
 
