@@ -57,8 +57,8 @@ keys = [
 
 
 layouts = [
-    layout.xmonad.MonadTall(name='monad-padded', margin=30, border_width=1, border_focus='#eeeeee'),
-    layout.xmonad.MonadTall(name='monad', border_width=1, border_focus='#eeeeee'),
+    layout.xmonad.MonadTall(name='monad-padded', margin=30, border_width=1, border_focus='#000000'),
+    layout.xmonad.MonadTall(name='monad', border_width=1, border_focus='#000000'),
     layout.max.Max(name='max'),
 ]
 
