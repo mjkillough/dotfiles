@@ -16,7 +16,7 @@ gsettings set org.gnome.desktop.interface scaling-factor 2
 source ~/.profile
 
 set-wallpaper --copy-root-window
-random-wallpaper
+change-wallpaper
 
 # Might need to do this again after changing DPI, even though lightdm
 # does it.

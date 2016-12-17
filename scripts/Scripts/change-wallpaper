@@ -1,9 +1,9 @@
 #!/bin/sh
 
-set-wallpaper --image ~/Photos/wallpaper --fade-secs 2
+set-wallpaper --image `random-wallpaper --get` --fade-secs 2
 
 # We download the new wallpaper for the next time it needs to be set. We don't
 # attempt to download-and-then-set, as the download can take a while or not be
 # possible.
 # (This is intentionally simple. Half-complete downloads could screw with us, etc.)
-wget https://source.unsplash.com/random/2560x1600 -O ~/Photos/random-wallpaper.jpg -b -q -o /dev/null
+random-wallpaper --download
