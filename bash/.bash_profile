@@ -4,6 +4,6 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-export PATH=$PATH:~/Scripts/
+export PATH=$PATH:~/Scripts/:~/.cargo/bin/
 export EDITOR=vim
 
