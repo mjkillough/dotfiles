@@ -15,12 +15,17 @@ gsettings set org.gnome.desktop.interface scaling-factor 2
 
 source ~/.profile
 
-set-wallpaper --copy-root-window
+# For some reason running these two in parallel is necessary for
+# them to work reliably...
+set-wallpaper --copy-root-window &
 change-wallpaper
 
 # Might need to do this again after changing DPI, even though lightdm
 # does it.
 xrdb -merge ~/.Xresources
 
-exec qtile
+
+RUST_BACKTRACE=1 cnx &
+#exec qtile
+exec lanta
 
