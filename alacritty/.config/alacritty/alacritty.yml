@@ -16,11 +16,6 @@ scrolling:
   # scrollback is enabled (history > 0).
   multiplier: 3
 
-  # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: false
-
-tabspaces: 4
-
 font:
   normal:
     family: EnvyCodeR
