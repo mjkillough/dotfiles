@@ -5,8 +5,6 @@ window:
   
   dynamic_padding: true
 
-tabspaces: 4
-
 font:
   normal:
     family: Envy Code R
