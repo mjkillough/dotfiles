@@ -1,115 +1,107 @@
 window:
-  # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
-
-  decorations: none
-  startup_mode: Windowed
-
   padding:
     x: 2
     y: 2
+  
+  dynamic_padding: true
 
-scrolling:
-  history: 10000
-
-  # Number of lines the viewport will move for every line scrolled when
-  # scrollback is enabled (history > 0).
-  multiplier: 3
+tabspaces: 4
 
 font:
   normal:
-    family: EnvyCodeR
+    family: Envy Code R
     style: Regular
+
   bold:
-    family: EnvyCodeR
-    style: Bold
+    family: Envy Code R
+    style: Regular
+
   italic:
-    family: EnvyCodeR
+    family: Envy Code R
     style: Italic
+  
+  size: 11.0
 
-  size: 10.0
-
-  # Offset is the extra space around each character. `offset.y` can be thought of
-  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
-  offset:
-    x: 0
-    y: 0
-
-  # Glyph offset determines the locations of the glyphs within their cells with
-  # the default being at the bottom. Increasing `x` moves the glyph to the right,
-  # increasing `y` moves the glyph upwards.
-  glyph_offset:
-    x: 0
-    y: 0
-
-  # Thin stroke font rendering (macOS only)
-  use_thin_strokes: true
-
-draw_bold_text_with_bright_colors: true
-
-# Based on:
-# grassland by bohoomil
+# color_start
+# dracula.yml
+# Colors (Dracula)
 colors:
+  # Default colors
   primary:
-    background: '0x0d1926'
-    foreground: '0xd9e6f2'
+    background: '0x282a36'
+    foreground: '0xf8f8f2'
+
+    # Bright and dim foreground colors
+    #
+    # The dimmed foreground color is calculated automatically if it is not present.
+    # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
+    # is `false`, the normal foreground color will be used.
+    #dim_foreground: '0x9a9a9a'
+    #bright_foreground: '0xffffff'
+
+  # Cursor colors
+  #
+  # Colors which should be used to draw the terminal cursor. If these are unset,
+  # the cursor color will be the inverse of the cell color.
   cursor:
-    cursor: '0x238c0e'
+    text: '0x44475a'
+    cursor: '0xf8f8f2'
+
+  # Normal colors
   normal:
-    black:   '0x00070d'
-    red:     '0xa83a71'
-    green:   '0x71a83a'
-    yellow:  '0xa8713a'
-    blue:    '0x3a71a8'
-    magenta: '0x713aa8'
-    cyan:    '0x3aa871'
-    white:   '0xa6a6a6'
+    black:   '0x000000'
+    red:     '0xff5555'
+    green:   '0x50fa7b'
+    yellow:  '0xf1fa8c'
+    blue:    '0xbd93f9'
+    magenta: '0xff79c6'
+    cyan:    '0x8be9fd'
+    white:   '0xbfbfbf'
+
+  # Bright colors
   bright:
-    black:   '0x666666'
-    red:     '0xd78bb1'
-    green:   '0xb1d78b'
-    yellow:  '0xd7b18b'
-    blue:    '0x8bb1d7'
-    magenta: '0xb18bd7'
-    cyan:    '0x8bd7b1'
+    black:   '0x4d4d4d'
+    red:     '0xff6e67'
+    green:   '0x5af78e'
+    yellow:  '0xf4f99d'
+    blue:    '0xcaa9fa'
+    magenta: '0xff92d0'
+    cyan:    '0x9aedfe'
     white:   '0xe6e6e6'
 
-visual_bell:
-  duration: 0 # disable
+  # Dim colors
+  #
+  # If the dim colors are not set, they will be calculated automatically based
+  # on the `normal` colors.
+  dim:
+    black:   '0x14151b'
+    red:     '0xff2222'
+    green:   '0x1ef956'
+    yellow:  '0xebf85b'
+    blue:    '0x4d5b86'
+    magenta: '0xff46b0'
+    cyan:    '0x59dffc'
+    white:   '0xe6e6d1'
 
-background_opacity: 1.0 # opaque
+  # Indexed Colors
+  #
+  # The indexed colors include all colors from 16 to 256.
+  # When these are not set, they're filled with sensible defaults.
+  #
+  # Example:
+  #   `- { index: 16, color: '0xff00ff' }`
+  #
+  indexed_colors: []
+
+# color_end
 
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
 mouse:
-  double_click: { threshold: 300 }
-  triple_click: { threshold: 300 }
+  hide_when_typing: true
 
-  hide_when_typing: false
-
-  url:
-    modifiers: Control
-    launcher:
-      program: xdg-open
-      args: []
-
-selection:
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-
-  # When set to `true`, selected text will be copied to the primary clipboard.
-  save_to_clipboard: false
-
-# Allow terminal applications to change Alacritty's window title.
 dynamic_title: true
-
-cursor:
-  style: Block
-  unfocused_hollow: true
-
-live_config_reload: true
-
-working_directory: None
 
 # Key bindings
 #
@@ -205,8 +197,9 @@ working_directory: None
 #   - AppKeypad
 key_bindings:
   # (Windows/Linux only)
-  - { key: V,        mods: Control, action: Paste            }
+  - { key: V,        mods: Control|Shift,       action: Paste            }
   - { key: C,        mods: Control|Shift, action: Copy             }
+
   #- { key: Insert,   mods: Shift,         action: PasteSelection   }
   #- { key: Key0,     mods: Control,       action: ResetFontSize    }
   #- { key: Equals,   mods: Control,       action: IncreaseFontSize }
