@@ -99,6 +99,11 @@ function! CocStatus() abort
   return strlen(l:status) > 0 ? l:status . ' ' : ''
 endfunction
 
+function! TagsStatus() abort
+  let l:status = gutentags#statusline()
+  return strlen(l:status) > 0 ? ' ' . l:status . ' ' : ''
+endfunction
+
 function! FolderName() abort
   let l:folder = expand('%:p:h:t')
   return strlen(l:folder) > 0 ? '  ' . l:folder . ' ' : ''
@@ -117,7 +122,10 @@ set statusline+=%#ErrorMsg#
 set statusline+=%{StatusDiagnostic()}
 set statusline+=%#WildMenu#
 set statusline+=%{CocStatus()}
-set statusline+=%{gutentags#statusline()}
+set statusline+=%#Visual#
+set statusline+= 
+set statusline+=%#WildMenu#
+set statusline+=%{TagsStatus()}
 set statusline+=%#Visual#
 set statusline+=\ %y
 set statusline+=\ %2p%%
