@@ -10,8 +10,13 @@ set hidden
 set autoindent
 set backspace=indent,eol,start
 set smarttab
+set textwidth=80
 
 set autoread
+
+set incsearch
+
+filetype plugin indent on
 
 " Always show signcolumn/line-numbers.
 set signcolumn=yes
@@ -23,8 +28,10 @@ highligh clear VertSplit
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
@@ -34,11 +41,6 @@ colorscheme dracula
 
 noremap <silent> <C-S> :update<CR>
 vnoremap <silent> <C-S> <C-C>:update<CR>
-
-map <Home> <Esc>^
-imap <Home> <Esc>^i
-map <End> <Esc>$
-imap <End> <Esc>A
 
 map <C-e> :CocList diagnostics<CR>
 
@@ -55,15 +57,27 @@ endfunction
 
 map <C-b> :NERDTreeToggle<CR>
 
-map <C-p> :FZF<CR>
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-h': 'split',
-  \ 'ctrl-x': 'vsplit' }
+" From fzf.vim's README: uses ripgrep for the search rather than fzf.
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+noremap <Leader>f :RG<CR>
+noremap <Leader>b :Buffers<CR>
+noremap <C-p> :Files<CR>
 
 " C-_ is C-/
 nmap <C-_> <Plug>Commentary
 vmap <C-_> <Plug>Commentary
+
+command! Settings e $MYVIMRC
+command! ReloadSettings so $MYVIMRC
 
 " Status Bar
 
@@ -103,9 +117,13 @@ set statusline+=%#ErrorMsg#
 set statusline+=%{StatusDiagnostic()}
 set statusline+=%#WildMenu#
 set statusline+=%{CocStatus()}
+set statusline+=%{gutentags#statusline()}
 set statusline+=%#Visual#
 set statusline+=\ %y
 set statusline+=\ %2p%%
 set statusline+=\ %2l:%-2c
 set statusline+=\ 
+
+let g:gutentags_ctags_executable = 'uctags'
+let g:gutentags_exclude_filetypes = []
 
