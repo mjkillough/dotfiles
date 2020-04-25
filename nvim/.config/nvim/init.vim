@@ -42,6 +42,9 @@ colorscheme dracula
 noremap <silent> <C-S> :update<CR>
 vnoremap <silent> <C-S> <C-C>:update<CR>
 
+set listchars=tab:>·,trail:~,extends:>,precedes:<,space:.
+noremap <silent> <Leader>w :set list!<CR>
+
 map <C-e> :CocList diagnostics<CR>
 
 inoremap <silent><expr> <TAB>
