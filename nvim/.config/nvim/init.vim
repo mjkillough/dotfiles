@@ -138,3 +138,6 @@ set statusline+=\
 let g:gutentags_ctags_executable = 'uctags'
 let g:gutentags_exclude_filetypes = []
 
+autocmd BufNewFile,BufRead /tmp/neomutt* set noautoindent filetype=mail wm=0 tw=72 nonumber digraph nolist
+autocmd BufNewFile,BufRead ~/tmp/neomutt* set noautoindent filetype=mail wm=0 tw=72 nonumber digraph nolist
+

@@ -1,0 +1,41 @@
+set realname = "Michael Killough"
+set from = "michaeljkillough@gmail.com"
+
+set mbox_type = Maildir
+set folder = /home/mjk/Mail
+set spoolfile = +/inbox/
+set header_cache = /home/mjk/Mail/cache/
+
+mailboxes \
++inbox \
++london-hackspace \
++openbsd/tech \
++openbsd/bugs \
++openbsd/ports \
++openbsd/source-changes
+
+set editor = "nvim"
+
+ignore *
+unignore from date subject to cc
+unignore x-mailer
+
+set sort = 'threads'
+set sort_aux = 'reverse-last-date-received'
+set charset = "utf-8"
+set pager_index_lines = 10
+set pager_context = 3
+
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
+
+macro index,pager e "<save-message>=archive<enter>" "Archive Message"
+
+bind index,pager c noop
+bind index,pager c<up> sidebar-prev
+bind index,pager c<down> sidebar-next
+bind index,pager cc sidebar-open
+
+source ~/.config/neomutt/dracula.muttrc
+
