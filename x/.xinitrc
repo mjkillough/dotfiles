@@ -1,31 +1,12 @@
 #!/bin/sh
 
-if [ -d /etc/X11/xinit/xinitrc.d ] ; then
- for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-  [ -x "$f" ] && . "$f"
- done
- unset f
-fi
+. ~/.profile
 
-# Need to start daemon for Sublime Text 3 to pickup settings.
-/usr/lib/gnome-settings-daemon/gnome-settings-daemon-localeexec &
-gsettings set org.gnome.desktop.interface scaling-factor 2
+xrdb ~/.Xresources
 
-#compton --vsync drm &
+setxkbmap "gb(mac)"
 
-source ~/.profile
+syndaemon -i 0.5 -d
 
-# For some reason running these two in parallel is necessary for
-# them to work reliably...
-set-wallpaper --copy-root-window &
-change-wallpaper
-
-# Might need to do this again after changing DPI, even though lightdm
-# does it.
-xrdb -merge ~/.Xresources
-
-
-RUST_BACKTRACE=1 cnx &
-#exec qtile
-exec lanta
-
+/home/mjk/Code/cnx/target/debug/cnx &
+exec /home/mjk/Code/lanta/target/debug/lanta
