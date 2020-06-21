@@ -4,12 +4,17 @@
 
 set nobackup
 set nowritebackup
+set noswapfile
 
 set hidden
 
 set autoindent
 set backspace=indent,eol,start
 set smarttab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
 set textwidth=80
 
 set autoread
@@ -34,6 +39,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'vhda/verilog_systemverilog.vim'
 call plug#end()
 
 set termguicolors
@@ -73,6 +79,7 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 noremap <Leader>f :RG<CR>
 noremap <Leader>b :Buffers<CR>
+noremap <Leader>n :noh<CR>
 noremap <C-p> :Files<CR>
 
 " C-_ is C-/
@@ -126,18 +133,40 @@ set statusline+=%{StatusDiagnostic()}
 set statusline+=%#WildMenu#
 set statusline+=%{CocStatus()}
 set statusline+=%#Visual#
-set statusline+= 
+set statusline+=
 set statusline+=%#WildMenu#
 set statusline+=%{TagsStatus()}
 set statusline+=%#Visual#
 set statusline+=\ %y
 set statusline+=\ %2p%%
 set statusline+=\ %2l:%-2c
-set statusline+=\ 
+set statusline+=\
 
 let g:gutentags_ctags_executable = 'uctags'
 let g:gutentags_exclude_filetypes = []
 
+" OpenBSD: cd /sys/arch/amd64 && make links && make tags
+set tags+=arch/amd64/tags
+
 autocmd BufNewFile,BufRead /tmp/neomutt* set noautoindent filetype=mail wm=0 tw=72 nonumber digraph nolist
 autocmd BufNewFile,BufRead ~/tmp/neomutt* set noautoindent filetype=mail wm=0 tw=72 nonumber digraph nolist
+
+function! ClangFormat()
+  let l:formatdiff = 1
+  py3file /usr/local/share/clang/clang-format.py
+endfunction
+
+" autocmd BufWritePre *.h,*.c,*.cc,*.cpp call ClangFormat()
+" command! ClangFormat call ClangFormat()
+
+autocmd Filetype systemverilog set tabstop=2 softtabstop=2 shiftwidth=2
+
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    keepp %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 

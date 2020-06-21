@@ -1,4 +1,7 @@
 {
     "coc.preferences.formatOnSaveFiletypes": ["rust"],
-    "rust-analyzer.serverPath": "/home/mjk/.cargo/bin/rust-analyzer"
+    "rust-analyzer.serverPath": "/home/mjk/.cargo/bin/rust-analyzer",
+    "rust-analyzer.inlayHints.typeHints": false,
+    "rust-analyzer.inlayHints.chainingHints": false,
+    "rust-analyzer.inlayHints.parameterHints": false
 }
