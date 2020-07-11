@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if xrandr -q | grep 'HDMI2 connected'; then
+    echo "HDMI connected, disabling built-in display";
+    xrandr --output eDP1 --off;
+    xrandr --output HDMI2 --auto --scale 1.5x1.5;
+    . ~/.fehbg;
+else
+    echo "HDMI disconnected, enabling built-in display";
+    xrandr --output eDP1 --auto;
+    xrandr --output HDMI2 --off;
+    . ~/.fehbg;
+fi
+
